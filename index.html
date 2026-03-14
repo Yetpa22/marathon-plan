@@ -15,106 +15,195 @@
     --border2: rgba(255,255,255,0.14);
     --text: #f0f0f0;
     --text2: #999;
-    --text3: #666;
+    --text3: #555;
     --blue: #4a9eff;
-    --blue-bg: rgba(74,158,255,0.12);
     --green: #5dc87a;
-    --green-bg: rgba(93,200,122,0.12);
     --amber: #f5a623;
-    --amber-bg: rgba(245,166,35,0.12);
     --red: #ff6b6b;
-    --red-bg: rgba(255,107,107,0.12);
     --teal: #3dd6a3;
-    --teal-bg: rgba(61,214,163,0.12);
     --purple: #a78bfa;
-    --purple-bg: rgba(167,139,250,0.12);
-    --radius: 12px;
-    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-sm: 10px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; min-height: 100vh; padding-bottom: 40px; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; min-height: 100vh; padding-bottom: 48px; }
 
-  /* HEADER */
-  .app-header { padding: 52px 20px 20px; background: linear-gradient(180deg, #141414 0%, var(--bg) 100%); border-bottom: 0.5px solid var(--border); }
-  .app-header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
-  .app-header p { font-size: 13px; color: var(--text2); }
+  /* ── HEADER ── */
+  .app-header { padding: 52px 20px 16px; }
+  .app-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.8px; }
+  .app-header p { font-size: 13px; color: var(--text2); margin-top: 3px; }
 
-  /* METRICS */
-  .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px 20px; }
-  .metric { background: var(--bg2); border-radius: var(--radius-sm); padding: 12px 14px; border: 0.5px solid var(--border); }
-  .metric-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-  .metric-value { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-  .metric-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  /* ── METRICS ── */
+  .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 4px 20px 20px; }
+  .metric { background: var(--bg2); border-radius: var(--radius-sm); padding: 11px 13px; border: 0.5px solid var(--border); }
+  .metric-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+  .metric-value { font-size: 21px; font-weight: 700; letter-spacing: -0.5px; }
+  .metric-sub { font-size: 11px; color: var(--text2); margin-top: 1px; }
 
-  /* TABS */
-  .tabs { display: flex; gap: 6px; padding: 0 20px 16px; }
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 6px; padding: 0 20px 20px; }
   .tab { flex: 1; padding: 9px 12px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 0.5px solid var(--border2); background: transparent; color: var(--text2); transition: all 0.15s; text-align: center; }
   .tab.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-  /* PHASE LEGEND */
-  .legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 14px; }
-  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
-  .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  /* ── TODAY CARD ── */
+  .today-wrap { padding: 0 20px 16px; }
+  .today-card {
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border);
+    overflow: hidden;
+    position: relative;
+  }
+  .today-glow {
+    position: absolute; inset: 0;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+  .today-inner { padding: 16px; position: relative; }
 
-  /* WEEKS GRID */
+  .today-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .today-meta-left { display: flex; align-items: center; gap: 6px; }
+  .today-date-lbl { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; }
+  .today-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--text3); }
+  .today-week-lbl { font-size: 11px; color: var(--text3); }
+  .today-pill { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.04em; }
+
+  .today-name { font-size: 22px; font-weight: 800; letter-spacing: -0.6px; line-height: 1.1; margin-bottom: 6px; }
+  .today-desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+
+  /* log button */
+  .log-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    width: 100%; padding: 11px 14px;
+    border-radius: var(--radius-sm); border: 0.5px solid var(--border2);
+    background: var(--bg3); color: var(--text2);
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .log-toggle:active { opacity: 0.7; }
+  .log-toggle.done { border-color: var(--green); color: var(--green); }
+  .log-toggle-icon { font-size: 14px; line-height: 1; }
+
+  /* ── LOG FORM ── */
+  .log-form {
+    padding: 14px 16px 16px;
+    border-top: 0.5px solid var(--border);
+    background: var(--bg2);
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-field { display: flex; flex-direction: column; gap: 5px; }
+  .form-label { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; }
+  .form-input {
+    background: var(--bg3); border: 0.5px solid var(--border2);
+    border-radius: var(--radius-sm); padding: 10px 12px;
+    color: var(--text); font-size: 15px; font-family: inherit;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-input:focus { outline: none; border-color: rgba(255,255,255,0.25); }
+  .form-input::placeholder { color: var(--text3); }
+  textarea.form-input { resize: none; height: 68px; font-size: 13px; }
+
+  .rpe-row { display: flex; gap: 4px; }
+  .rpe-btn {
+    flex: 1; padding: 9px 2px;
+    border-radius: 8px; border: 0.5px solid var(--border);
+    background: var(--bg3); color: var(--text3);
+    font-size: 11px; font-weight: 600; cursor: pointer;
+    transition: all 0.1s;
+  }
+  .rpe-btn.sel { background: var(--border2); color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+  .save-btn {
+    width: 100%; padding: 13px;
+    border-radius: var(--radius-sm); border: none;
+    background: var(--text); color: var(--bg);
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .save-btn:active { opacity: 0.75; }
+
+  /* ── PHASE LEGEND ── */
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 12px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
+  .legend-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── WEEKS GRID ── */
   .weeks-section { padding: 0 20px; }
-  .weeks-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-bottom: 16px; }
+  .weeks-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-bottom: 14px; }
   .week-card { border-radius: 8px; padding: 7px 4px; cursor: pointer; border: 1.5px solid transparent; text-align: center; transition: all 0.12s; }
   .week-card.active { border-color: white !important; }
-  .week-card:active { transform: scale(0.95); }
-  .wk-num { font-size: 9px; font-weight: 600; opacity: 0.7; }
+  .week-card.cur { box-shadow: 0 0 0 1px rgba(255,255,255,0.2); }
+  .week-card:active { transform: scale(0.94); }
+  .wk-num { font-size: 9px; font-weight: 600; opacity: 0.65; }
   .wk-km { font-size: 13px; font-weight: 700; }
-  .wk-unit { font-size: 8px; opacity: 0.6; }
+  .wk-unit { font-size: 8px; opacity: 0.55; }
 
-  /* DETAIL PANEL */
+  /* ── DETAIL PANEL ── */
   .detail { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 16px; margin: 0 20px; }
   .detail-title { font-size: 17px; font-weight: 700; margin-bottom: 3px; letter-spacing: -0.3px; }
   .detail-meta { font-size: 12px; color: var(--text2); margin-bottom: 14px; }
   .detail-meta span { margin-right: 10px; }
 
-  /* SESSIONS */
-  .session { display: flex; align-items: flex-start; gap: 10px; padding: 11px 12px; background: var(--bg3); border-radius: var(--radius-sm); margin-bottom: 8px; }
+  /* ── SESSIONS ── */
+  .session { display: flex; align-items: flex-start; gap: 10px; padding: 11px 12px; background: var(--bg3); border-radius: var(--radius-sm); margin-bottom: 7px; }
   .session:last-of-type { margin-bottom: 0; }
-  .session.rest-day { opacity: 0.3; }
+  .session.rest-day { opacity: 0.28; }
+  .session.today-row { border: 1px solid rgba(255,255,255,0.15); }
   .sess-day { font-size: 10px; font-weight: 600; color: var(--text3); width: 26px; flex-shrink: 0; padding-top: 1px; text-transform: uppercase; }
   .sess-body { flex: 1; min-width: 0; }
   .sess-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
   .sess-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
   .sess-badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; font-weight: 600; align-self: flex-start; margin-top: 1px; }
 
-  /* TIP */
+  /* ── TIP ── */
   .tip { margin-top: 12px; padding: 11px 13px; border-radius: var(--radius-sm); border-left: 3px solid; }
   .tip p { font-size: 12px; line-height: 1.6; }
 
-  /* PACES */
-  .paces-section { padding: 0 20px; }
-  .paces-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .pace-card { background: var(--bg2); border-radius: var(--radius-sm); padding: 12px 14px; border: 0.5px solid var(--border); }
-  .pace-name { font-size: 11px; color: var(--text2); margin-bottom: 4px; }
-  .pace-val { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
-  .pace-desc { font-size: 11px; color: var(--text3); margin-top: 3px; line-height: 1.4; }
+  /* ── JOURNAL ── */
+  .journal-wrap { padding: 20px 20px 0; }
+  .journal-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .journal-hd-title { font-size: 13px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.07em; }
+  .journal-entry { background: var(--bg2); border-radius: var(--radius-sm); border: 0.5px solid var(--border); padding: 12px 14px; margin-bottom: 8px; }
+  .j-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .j-date { font-size: 11px; color: var(--text3); margin-bottom: 2px; }
+  .j-name { font-size: 14px; font-weight: 600; }
+  .j-stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 7px; }
+  .j-stat { font-size: 12px; color: var(--text2); }
+  .j-stat strong { color: var(--text); }
+  .j-notes { font-size: 12px; color: var(--text2); margin-top: 6px; font-style: italic; line-height: 1.5; }
+  .j-del { font-size: 16px; color: var(--text3); background: none; border: none; cursor: pointer; line-height: 1; padding: 0 0 0 8px; }
+  .j-empty { text-align: center; padding: 24px 0; color: var(--text3); font-size: 13px; line-height: 1.6; }
 
-  /* SWIPE HINT */
-  .hint { text-align: center; font-size: 11px; color: var(--text3); padding: 12px 0 4px; }
+  /* ── PACES ── */
+  .paces-section { padding: 0 20px; }
+  .paces-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pace-card { background: var(--bg2); border-radius: var(--radius-sm); padding: 13px 14px; border: 0.5px solid var(--border); }
+  .pace-name { font-size: 11px; color: var(--text2); margin-bottom: 5px; }
+  .pace-val { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
+  .pace-desc { font-size: 11px; color: var(--text3); margin-top: 4px; line-height: 1.4; }
+
+  .hint { text-align: center; font-size: 11px; color: var(--text3); padding: 10px 0 4px; }
 </style>
 </head>
 <body>
 
 <div class="app-header">
-  <h1>Plan Marathon 🏃</h1>
-  <p>1er novembre 2026 · Objectif 3h55 · Sub 4h</p>
+  <h1>Marathon 🏃</h1>
+  <p>1er novembre 2026 · Objectif 3h55</p>
 </div>
 
 <div class="metrics">
   <div class="metric">
     <div class="metric-label">Objectif</div>
     <div class="metric-value" style="color:var(--blue)">3h55</div>
-    <div class="metric-sub">-29 min vs 2025</div>
+    <div class="metric-sub">−29 min vs 2025</div>
   </div>
   <div class="metric">
     <div class="metric-label">Allure cible</div>
     <div class="metric-value" style="color:var(--amber)">5:35</div>
-    <div class="metric-sub">min/km</div>
+    <div class="metric-sub">min / km</div>
   </div>
   <div class="metric">
     <div class="metric-label">Semaines restantes</div>
@@ -124,7 +213,7 @@
   <div class="metric">
     <div class="metric-label">Pic volume</div>
     <div class="metric-value" style="color:var(--purple)">58 km</div>
-    <div class="metric-sub">semaines 25-26</div>
+    <div class="metric-sub">S25 – S26</div>
   </div>
 </div>
 
@@ -133,7 +222,75 @@
   <button class="tab" onclick="switchTab('paces')">Allures</button>
 </div>
 
+<!-- ══ PLAN ══ -->
 <div id="tab-plan">
+
+  <!-- ·· SÉANCE DU JOUR ·· -->
+  <div class="today-wrap">
+    <div class="today-card" id="todayCard">
+      <div class="today-glow" id="todayGlow"></div>
+      <div class="today-inner">
+        <div class="today-meta">
+          <div class="today-meta-left">
+            <span class="today-date-lbl" id="todayDayLbl">—</span>
+            <div class="today-sep"></div>
+            <span class="today-week-lbl" id="todayWeekLbl">—</span>
+          </div>
+          <span class="today-pill" id="todayPill"></span>
+        </div>
+        <div class="today-name" id="todayName">—</div>
+        <div class="today-desc" id="todayDescEl"></div>
+        <button class="log-toggle" id="logToggle" onclick="toggleLog()">
+          <span class="log-toggle-icon">＋</span>
+          <span id="logToggleLbl">Enregistrer cette séance</span>
+        </button>
+      </div>
+      <div class="log-form" id="logForm">
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Distance (km)</label>
+            <input class="form-input" type="number" id="logDist" placeholder="0.0" step="0.1" min="0">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Durée (min)</label>
+            <input class="form-input" type="number" id="logDur" placeholder="0" min="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">FC moy (bpm)</label>
+            <input class="form-input" type="number" id="logHR" placeholder="—" min="0" max="220">
+          </div>
+          <div class="form-field">
+            <label class="form-label">FC max (bpm)</label>
+            <input class="form-input" type="number" id="logHRmax" placeholder="—" min="0" max="220">
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Effort perçu (RPE / 10)</label>
+          <div class="rpe-row" id="rpeRow">
+            <button class="rpe-btn" onclick="selRPE(1)">1</button>
+            <button class="rpe-btn" onclick="selRPE(2)">2</button>
+            <button class="rpe-btn" onclick="selRPE(3)">3</button>
+            <button class="rpe-btn" onclick="selRPE(4)">4</button>
+            <button class="rpe-btn" onclick="selRPE(5)">5</button>
+            <button class="rpe-btn" onclick="selRPE(6)">6</button>
+            <button class="rpe-btn" onclick="selRPE(7)">7</button>
+            <button class="rpe-btn" onclick="selRPE(8)">8</button>
+            <button class="rpe-btn" onclick="selRPE(9)">9</button>
+            <button class="rpe-btn" onclick="selRPE(10)">10</button>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Notes</label>
+          <textarea class="form-input" id="logNotes" placeholder="Sensations, météo, remarques…"></textarea>
+        </div>
+        <button class="save-btn" onclick="saveLog()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ·· GRILLE SEMAINES ·· -->
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#4a9eff"></div>Base</div>
     <div class="legend-item"><div class="legend-dot" style="background:#5dc87a"></div>Développement</div>
@@ -149,8 +306,18 @@
       <p style="font-size:13px;color:var(--text2)">Sélectionne une semaine ci-dessus.</p>
     </div>
   </div>
+
+  <!-- ·· JOURNAL ·· -->
+  <div class="journal-wrap">
+    <div class="journal-hd">
+      <div class="journal-hd-title">Journal</div>
+    </div>
+    <div id="journalList"></div>
+  </div>
+
 </div>
 
+<!-- ══ ALLURES ══ -->
 <div id="tab-paces" style="display:none;">
   <div class="paces-section">
     <div class="paces-grid">
@@ -160,7 +327,7 @@
         <div class="pace-desc">Tu peux parler normalement. La base de tout.</div>
       </div>
       <div class="pace-card">
-        <div class="pace-name">Allure marathon (AM)</div>
+        <div class="pace-name">Allure marathon</div>
         <div class="pace-val" style="color:var(--amber)">5:30–5:40</div>
         <div class="pace-desc">Objectif jour J. Confortable mais soutenu.</div>
       </div>
@@ -189,74 +356,71 @@
 </div>
 
 <script>
+// ═══════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════
+const PLAN_START = new Date(2026,2,9); // 9 mars 2026
 const VOLS = [28,32,34,24,36,38,40,28,42,44,46,30,48,50,52,34,54,54,56,38,56,58,58,40,58,58,54,40,50,46,40,34,18];
 
 function getPhaseStyle(w) {
-  if ([4,8,12,16,20,24,28,32].includes(w)) return { bg:'rgba(61,214,163,0.18)', text:'#3dd6a3' };
-  if (w<=8) return { bg:'rgba(74,158,255,0.18)', text:'#4a9eff' };
-  if (w<=16) return { bg:'rgba(93,200,122,0.18)', text:'#5dc87a' };
-  if (w===33) return { bg:'rgba(255,107,107,0.18)', text:'#ff6b6b' };
-  return { bg:'rgba(245,166,35,0.18)', text:'#f5a623' };
+  if ([4,8,12,16,20,24,28,32].includes(w)) return { bg:'rgba(61,214,163,0.16)', text:'#3dd6a3' };
+  if (w<=8)  return { bg:'rgba(74,158,255,0.16)',  text:'#4a9eff' };
+  if (w<=16) return { bg:'rgba(93,200,122,0.16)',  text:'#5dc87a' };
+  if (w===33) return { bg:'rgba(255,107,107,0.16)', text:'#ff6b6b' };
+  return { bg:'rgba(245,166,35,0.16)', text:'#f5a623' };
 }
 
 function getPhaseName(w) {
   if ([4,8,12,16,20,24,28,32].includes(w)) return 'Récupération';
-  if (w<=8) return 'Base aérobie';
+  if (w<=8)  return 'Base aérobie';
   if (w<=16) return 'Développement';
   if (w===33) return 'Affûtage';
   return 'Spécifique marathon';
 }
 
 function getWeekStart(w) {
-  const d = new Date(2026,2,16);
+  const d = new Date(PLAN_START);
   d.setDate(d.getDate()+(w-1)*7);
   return d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
 }
 
 const FRAC = {
-  'intro_400':    {type:'VMA courte',      name:'6×400m',                 desc:'Éch. 15 min · 6×400m à 4:35/km (récup 2 min trot) · retour 10 min.'},
-  'intro_cotes':  {type:'Côtes',           name:'8×montées 100m',         desc:'Éch. 15 min · 8×100m montée effort max (récup descente trot) · retour 10 min.'},
-  'vma_400':      {type:'VMA',             name:'8×400m',                 desc:'Éch. 15 min · 8×400m à 4:25/km (récup 90s trot) · retour 10 min.'},
-  'pyramide_c':   {type:'Pyramide',        name:'200–400–600–400–200',    desc:'Éch. 15 min · 200m / 400m / 600m / 400m / 200m à 4:25/km (récup = distance en trot) · retour 10 min.'},
-  'cotes_l':      {type:'Côtes longues',   name:'6×200m côte',            desc:'Éch. 15 min · 6×200m montée soutenu (récup descente trot) · retour 10 min.'},
-  'vma_400x10':   {type:'VMA',             name:'10×400m',                desc:'Éch. 15 min · 10×400m à 4:20/km (récup 75s trot) · retour 10 min.'},
-  'pyramide_l':   {type:'Pyramide',        name:'400–800–1200–800–400',   desc:'Éch. 15 min · 400 / 800 / 1200 / 800 / 400m à 4:25/km (récup moitié dist. trot) · retour 10 min.'},
-  'tempo_2x15':   {type:'Tempo',           name:'2×15 min tempo',         desc:'Éch. 15 min · 2×15 min à 5:05/km (récup 5 min trot) · retour 10 min.'},
-  'broken_tempo': {type:'Tempo fractionné',name:'4×8 min tempo',          desc:'Éch. 15 min · 4×8 min à 5:00/km (récup 3 min trot) · retour 10 min.'},
-  'vma_200':      {type:'VMA explosive',   name:'12×200m',                desc:'Éch. 15 min · 12×200m à 4:10/km (récup 90s trot) · retour 10 min.'},
-  'vma_1000':     {type:'VMA longue',      name:'6×1000m',                desc:'Éch. 15 min · 6×1000m à 4:25/km (récup 2 min trot) · retour 10 min.'},
-  'seuil_1000':   {type:'Seuil',           name:'5×1000m seuil',          desc:'Éch. 15 min · 5×1000m à 5:00/km (récup 2 min trot) · retour 10 min.'},
-  'seuil_2000':   {type:'Seuil long',      name:'3×2000m seuil',          desc:'Éch. 15 min · 3×2000m à 5:05/km (récup 3 min trot) · retour 10 min.'},
-  'am_blocs':     {type:'Allure marathon', name:'4×2 km à AM',            desc:'Éch. 15 min · 4×2 km à 5:35/km (récup 2 min trot) · retour 10 min.'},
-  'alternance':   {type:'Alternance',      name:'Alternance AM/seuil',    desc:'Éch. 15 min · 6×(3 min à 5:35/km + 2 min à 5:00/km) · retour 10 min.'},
-  'vma_rappel':   {type:'VMA rappel',      name:'8×400m rappel',          desc:'Éch. 15 min · 8×400m à 4:25/km (récup 90s trot) · retour 10 min.'},
-  'tempo_25':     {type:'Tempo continu',   name:'25 min tempo',           desc:'Éch. 15 min · 25 min à 5:05/km · retour 10 min.'},
-  'seuil_3x10':   {type:'Seuil fractionné',name:'3×10 min seuil',         desc:'Éch. 15 min · 3×10 min à 5:05/km (récup 3 min trot) · retour 10 min.'},
+  'intro_400':   {type:'VMA courte',      name:'6×400m',              desc:'Éch. 15 min · 6×400m à 4:35/km (récup 2 min trot) · retour 10 min.'},
+  'intro_cotes': {type:'Côtes',           name:'8×montées 100m',      desc:'Éch. 15 min · 8×100m montée effort max (récup descente trot) · retour 10 min.'},
+  'vma_400':     {type:'VMA',             name:'8×400m',              desc:'Éch. 15 min · 8×400m à 4:25/km (récup 90s trot) · retour 10 min.'},
+  'pyramide_c':  {type:'Pyramide',        name:'200–400–600–400–200', desc:'Éch. 15 min · 200/400/600/400/200m à 4:25/km (récup = dist. trot) · retour 10 min.'},
+  'cotes_l':     {type:'Côtes longues',   name:'6×200m côte',         desc:'Éch. 15 min · 6×200m montée soutenu (récup descente trot) · retour 10 min.'},
+  'vma_400x10':  {type:'VMA',             name:'10×400m',             desc:'Éch. 15 min · 10×400m à 4:20/km (récup 75s trot) · retour 10 min.'},
+  'pyramide_l':  {type:'Pyramide',        name:'400–800–1200–800–400',desc:'Éch. 15 min · 400/800/1200/800/400m à 4:25/km (récup moitié dist.) · retour 10 min.'},
+  'tempo_2x15':  {type:'Tempo',           name:'2×15 min tempo',      desc:'Éch. 15 min · 2×15 min à 5:05/km (récup 5 min trot) · retour 10 min.'},
+  'broken_tempo':{type:'Tempo fractionné',name:'4×8 min tempo',       desc:'Éch. 15 min · 4×8 min à 5:00/km (récup 3 min trot) · retour 10 min.'},
+  'vma_200':     {type:'VMA explosive',   name:'12×200m',             desc:'Éch. 15 min · 12×200m à 4:10/km (récup 90s trot) · retour 10 min.'},
+  'vma_1000':    {type:'VMA longue',      name:'6×1000m',             desc:'Éch. 15 min · 6×1000m à 4:25/km (récup 2 min trot) · retour 10 min.'},
+  'seuil_1000':  {type:'Seuil',           name:'5×1000m seuil',       desc:'Éch. 15 min · 5×1000m à 5:00/km (récup 2 min trot) · retour 10 min.'},
+  'seuil_2000':  {type:'Seuil long',      name:'3×2000m seuil',       desc:'Éch. 15 min · 3×2000m à 5:05/km (récup 3 min trot) · retour 10 min.'},
+  'am_blocs':    {type:'Allure marathon', name:'4×2 km à AM',         desc:'Éch. 15 min · 4×2 km à 5:35/km (récup 2 min trot) · retour 10 min.'},
+  'alternance':  {type:'Alternance',      name:'Alternance AM/seuil', desc:'Éch. 15 min · 6×(3 min à 5:35/km + 2 min à 5:00/km) · retour 10 min.'},
+  'vma_rappel':  {type:'VMA rappel',      name:'8×400m rappel',       desc:'Éch. 15 min · 8×400m à 4:25/km (récup 90s trot) · retour 10 min.'},
+  'tempo_25':    {type:'Tempo continu',   name:'25 min tempo',        desc:'Éch. 15 min · 25 min à 5:05/km · retour 10 min.'},
+  'seuil_3x10':  {type:'Seuil fractionné',name:'3×10 min seuil',      desc:'Éch. 15 min · 3×10 min à 5:05/km (récup 3 min trot) · retour 10 min.'},
 };
 const FRAC_W = {3:'intro_400',5:'vma_400',6:'pyramide_c',7:'cotes_l',9:'vma_400x10',10:'tempo_2x15',11:'pyramide_l',13:'vma_1000',14:'broken_tempo',15:'vma_200',17:'seuil_1000',18:'am_blocs',19:'alternance',21:'seuil_2000',22:'vma_rappel',23:'tempo_25',25:'seuil_1000',26:'seuil_3x10',27:'am_blocs',29:'alternance',30:'vma_rappel',31:'seuil_1000'};
 
 const JEU_SPE = {
-  17:{type:'EA',        name:'EF + blocs AM',             desc:'%v km · EF + 3×5 min à 5:35/km (récup 2 min trot). Ancrer l\'allure cible.'},
-  18:{type:'Fartlek',   name:'Fartlek libre',              desc:'%v km terrain varié · accélérations libres 1-3 min quand tu veux. Pas de montre.'},
-  19:{type:'Progressif',name:'Sortie progressive',         desc:'%v km · km 1-5 à 6:30/km → km 6-10 à 6:00/km → km 11-fin à 5:35/km.'},
-  21:{type:'EA',        name:'EF + blocs tempo',           desc:'%v km · EF + 2×8 min à 5:10/km (récup 3 min trot). Stimuler le seuil.'},
-  22:{type:'Fartlek',   name:'Fartlek structuré',          desc:'%v km · Éch. 10 min EF · 8×(1 min vite à ~4:30/km + 2 min trot) · retour 10 min EF.'},
-  23:{type:'Progressif',name:'Sortie progressive longue',  desc:'%v km · 1/3 à 6:30/km → 1/3 à 6:00/km → 1/3 à 5:40/km. Fin de marathon simulée.'},
-  25:{type:'EA',        name:'EF + blocs AM',              desc:'%v km · EF + 4×4 min à 5:35/km (récup 2 min trot). Qualité sans sur-solliciter.'},
-  26:{type:'Fartlek',   name:'Fartlek côtes',              desc:'%v km vallonné · attaque chaque montée effort soutenu, récup en descente. Naturel et tonique.'},
-  27:{type:'Progressif',name:'Sortie négative',            desc:'%v km · première moitié à 6:15/km, deuxième moitié à 5:40/km.'},
-  29:{type:'EA',        name:'EF + long bloc AM',          desc:'%v km · EF + 1×15 min à 5:35/km en fin. Le bloc est long — tiens l\'allure.'},
-  30:{type:'Fartlek',   name:'Fartlek libre court',        desc:'%v km facile · 5-6 accélérations libres 30-60s. Garder les jambes vives.'},
-  31:{type:'Progressif',name:'Sortie progressive courte',  desc:'%v km · 1/3 EF → 1/3 AM (5:35/km) → 1/3 tempo (5:10/km). Dernière séance intense.'},
+  17:{type:'EA',        name:'EF + blocs AM',            desc:'%v km · EF + 3×5 min à 5:35/km (récup 2 min trot). Ancrer l\'allure cible.'},
+  18:{type:'Fartlek',   name:'Fartlek libre',             desc:'%v km terrain varié · accélérations libres 1-3 min quand tu veux. Pas de montre.'},
+  19:{type:'Progressif',name:'Sortie progressive',        desc:'%v km · km 1-5 à 6:30/km → km 6-10 à 6:00/km → km 11-fin à 5:35/km.'},
+  21:{type:'EA',        name:'EF + blocs tempo',          desc:'%v km · EF + 2×8 min à 5:10/km (récup 3 min trot). Stimuler le seuil.'},
+  22:{type:'Fartlek',   name:'Fartlek structuré',         desc:'%v km · Éch. 10 min EF · 8×(1 min vite à ~4:30/km + 2 min trot) · retour 10 min EF.'},
+  23:{type:'Progressif',name:'Sortie progressive longue', desc:'%v km · 1/3 à 6:30/km → 1/3 à 6:00/km → 1/3 à 5:40/km. Fin de marathon simulée.'},
+  25:{type:'EA',        name:'EF + blocs AM',             desc:'%v km · EF + 4×4 min à 5:35/km (récup 2 min trot). Qualité sans sur-solliciter.'},
+  26:{type:'Fartlek',   name:'Fartlek côtes',             desc:'%v km vallonné · attaque chaque montée effort soutenu, récup en descente.'},
+  27:{type:'Progressif',name:'Sortie négative',           desc:'%v km · première moitié à 6:15/km, deuxième moitié à 5:40/km.'},
+  29:{type:'EA',        name:'EF + long bloc AM',         desc:'%v km · EF + 1×15 min à 5:35/km en fin. Le bloc est long — tiens l\'allure.'},
+  30:{type:'Fartlek',   name:'Fartlek libre court',       desc:'%v km facile · 5-6 accélérations libres 30-60s. Garder les jambes vives.'},
+  31:{type:'Progressif',name:'Sortie progressive courte', desc:'%v km · 1/3 EF → 1/3 AM (5:35/km) → 1/3 tempo (5:10/km).'},
 };
-
 const JEU_C = {'EA':'#f5a623','Fartlek':'#3dd6a3','Progressif':'#a78bfa'};
-
-function badge(label, color) {
-  const bg = color + '22';
-  const isHex = color.startsWith('#');
-  return `<span class="sess-badge" style="background:${bg};color:${color}">${label}</span>`;
-}
 
 function typePill(label, color) {
   return `<span style="display:inline-block;font-size:10px;padding:1px 7px;border-radius:20px;margin-bottom:4px;font-weight:600;background:${color}22;color:${color}">${label}</span><br>`;
@@ -299,19 +463,16 @@ function getSessions(w) {
 
   const fk = FRAC_W[w];
   const frac = fk ? FRAC[fk] : null;
-  const marDesc = frac ? typePill(frac.type,'#ff6b6b')+frac.desc : `${Math.round(v*0.22)} km facile.`;
-  const marName = frac ? frac.name : 'EF + ABC';
+  const marDesc  = frac ? typePill(frac.type,'#ff6b6b')+frac.desc : `${Math.round(v*0.22)} km facile.`;
+  const marName  = frac ? frac.name : 'EF + ABC';
   const marBadge = frac ? frac.type : 'EF';
-  const marBc = frac ? '#ff6b6b' : '#4a9eff';
+  const marBc    = frac ? '#ff6b6b' : '#4a9eff';
 
   let jeuName, jeuDesc, jeuBadge, jeuBc;
   if (JEU_SPE[w]) {
-    const j = JEU_SPE[w];
-    const km = Math.round(v*0.22);
-    jeuBc = JEU_C[j.type]||'#5dc87a';
-    jeuName = j.name;
-    jeuDesc = typePill(j.type, jeuBc) + j.desc.replace('%v', km);
-    jeuBadge = j.type;
+    const j = JEU_SPE[w]; const km = Math.round(v*0.22);
+    jeuBc = JEU_C[j.type]||'#5dc87a'; jeuName = j.name;
+    jeuDesc = typePill(j.type,jeuBc)+j.desc.replace('%v',km); jeuBadge = j.type;
   } else if (phase==='Développement') {
     jeuName='Sortie allure'; jeuDesc=`${Math.round(v*0.22)} km : EF + 15-20 min à allure semi (5:10/km) en fin.`; jeuBadge='EA'; jeuBc='#5dc87a';
   } else {
@@ -319,7 +480,7 @@ function getSessions(w) {
   }
 
   let longName, longDesc, longBc;
-  if (phase==='Base aérobie') { longName='Sortie longue progressive'; longDesc=`${Math.round(v*0.35)} km : 2/3 EF puis 1/3 allure marathon (5:35/km).`; longBc='#4a9eff'; }
+  if (phase==='Base aérobie')    { longName='Sortie longue progressive'; longDesc=`${Math.round(v*0.35)} km : 2/3 EF puis 1/3 allure marathon (5:35/km).`; longBc='#4a9eff'; }
   else if (phase==='Développement') { longName='Sortie longue allure'; longDesc=`${Math.round(v*0.36)} km : départ EF puis km 12 à fin à allure marathon (5:35/km).`; longBc='#5dc87a'; }
   else { longName='Sortie longue clé'; longDesc=`${Math.round(v*0.36)} km : 60% EF + 25% AM (5:35/km) + 15% tempo (5:10/km).`; longBc='#f5a623'; }
 
@@ -336,39 +497,41 @@ function getSessions(w) {
 
 function getTip(w) {
   if (w===33) return {color:'#ff6b6b',text:'SEMAINE DE COURSE. Hydratation maximale. Sommeil prioritaire. Pas de nouveaux aliments. Confiance en le travail accompli.'};
-  if ([4,8,12,16,20,24,28,32].includes(w)) return {color:'#3dd6a3',text:'Semaine de récup : volume réduit. Le corps se renforce pendant les repos, pas pendant les séances. Résiste à l\'envie d\'en faire plus.'};
+  if ([4,8,12,16,20,24,28,32].includes(w)) return {color:'#3dd6a3',text:'Semaine de récup : volume réduit. Le corps se renforce pendant le repos, pas pendant les séances. Résiste à l\'envie d\'en faire plus.'};
   if (w<=2) return {color:'#4a9eff',text:'Mise en route pure. EF uniquement. Deux semaines de patience qui construisent les fondations avant d\'accélérer.'};
   if (w>=29) return {color:'#ff6b6b',text:'Affûtage : le volume baisse, les séances restent qualitatives. Les jambes vont se sentir de plus en plus légères. C\'est bon signe.'};
   const jeu = JEU_SPE[w];
   if (jeu) {
-    if (jeu.type==='Fartlek') return {color:'#3dd6a3',text:'Fartlek = jeu de vitesse. Pas de montre, pas de pression : tu accélères quand tu veux. Excellent pour travailler les sensations.'};
+    if (jeu.type==='Fartlek')    return {color:'#3dd6a3',text:'Fartlek = jeu de vitesse. Pas de montre, pas de pression : tu accélères quand tu veux.'};
     if (jeu.type==='Progressif') return {color:'#a78bfa',text:'Sortie progressive : commence vraiment lentement. Entraîne ton corps à accélérer sur la fatigue — exactement la fin de marathon.'};
-    return {color:'#f5a623',text:'Séance de soutien avec blocs à allure cible. Pas d\'intensité — juste ancrer le rythme du jour J sans fatiguer.'};
+    return {color:'#f5a623',text:'Séance de soutien avec blocs à allure cible. Pas d\'intensité — juste ancrer le rythme du jour J.'};
   }
   const fk = FRAC_W[w];
   const msgs = {
-    'intro_400':'Première séance de fractionné. Récupération complète entre chaque répétition : tu dois repartir frais à chaque fois.',
+    'intro_400':'Première séance de fractionné. Récupération complète entre chaque répétition.',
     'vma_400':'400m classique pour la VMA. Allure soutenue et identique sur chaque répétition.',
-    'pyramide_c':'La pyramide varie les efforts et brise la monotonie. Tu montes en charge puis tu redescends progressivement.',
-    'cotes_l':'Côtes longues : effort soutenu en montée, récup complète en descente. Renforce la puissance sans impact excessif.',
+    'pyramide_c':'La pyramide varie les efforts. Tu montes en charge puis tu redescends progressivement.',
+    'cotes_l':'Côtes longues : effort soutenu en montée, récup complète en descente.',
     'vma_400x10':'Volume qui augmente. Cale une allure que tu peux tenir jusqu\'à la 10e répétition.',
     'pyramide_l':'Le 1200m au sommet est le moment clé — tiens l\'allure coûte que coûte.',
     'tempo_2x15':'2×15 min tempo : accumulation à allure seuil. La récup de 5 min est longue — c\'est voulu.',
-    'broken_tempo':'4 blocs courts : plus de volume à allure seuil qu\'un bloc continu. Récup courte pour rester dans la zone.',
-    'vma_200':'200m explosifs : vitesse pure et coordination neuromusculaire. Court, intense, différent.',
+    'broken_tempo':'4 blocs courts à allure seuil. Récup courte pour rester dans la zone.',
+    'vma_200':'200m explosifs : vitesse pure et coordination neuromusculaire.',
     'vma_1000':'6×1000m : excellent pour le seuil lactique. Allure identique sur chaque kilomètre.',
     'seuil_1000':'5×1000m seuil : entre semi et tempo. La base de la résistance marathon.',
-    'seuil_2000':'3×2000m proches du rythme semi. Endurance à vitesse élevée — le travail le plus spécifique.',
+    'seuil_2000':'3×2000m proches du rythme semi. Le travail le plus spécifique.',
     'am_blocs':'Blocs à allure marathon : ancrer le rythme cible dans le système neuromusculaire.',
     'alternance':'Alternance AM/seuil : simuler les variations de rythme d\'une vraie course.',
-    'vma_rappel':'Rappel VMA : maintenir la vivacité neuromusculaire tout en accumulant le volume marathon.',
+    'vma_rappel':'Rappel VMA : maintenir la vivacité neuromusculaire tout en accumulant le volume.',
     'tempo_25':'25 min continus : le plus long bloc tempo du plan. Régularité de la première à la dernière minute.',
     'seuil_3x10':'3×10 min seuil : dernière séance seuil intense avant les semaines finales.',
   };
-  const msg = fk && msgs[fk] ? msgs[fk] : '1 fractionné varié + sortie longue : les deux piliers de la semaine.';
-  return {color:'#4a9eff', text:msg};
+  return {color:'#4a9eff', text: fk && msgs[fk] ? msgs[fk] : '1 fractionné + sortie longue : les deux piliers de la semaine.'};
 }
 
+// ═══════════════════════════════════════
+//  GRID & DETAIL
+// ═══════════════════════════════════════
 let selectedW = null;
 
 function renderGrid() {
@@ -377,7 +540,7 @@ function renderGrid() {
   for (let w=1; w<=33; w++) {
     const p = getPhaseStyle(w);
     const card = document.createElement('div');
-    card.className = 'week-card';
+    card.className = 'week-card' + (w===currentWeek ? ' cur' : '');
     card.id = 'wc'+w;
     card.style.background = p.bg;
     card.innerHTML = `<div class="wk-num" style="color:${p.text}">S${w}</div><div class="wk-km" style="color:${p.text}">${VOLS[w-1]}</div><div class="wk-unit" style="color:${p.text}">km</div>`;
@@ -387,35 +550,32 @@ function renderGrid() {
 }
 
 function selectWeek(w) {
-  if (selectedW) {
-    const prev = document.getElementById('wc'+selectedW);
-    if (prev) prev.classList.remove('active');
-  }
+  if (selectedW) { const prev = document.getElementById('wc'+selectedW); if (prev) prev.classList.remove('active'); }
   selectedW = w;
   const card = document.getElementById('wc'+w);
-  if (card) {
-    card.classList.add('active');
-    card.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
-  }
+  if (card) { card.classList.add('active'); card.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
   renderDetail(w);
-  document.getElementById('detailPanel').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('detailPanel').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function renderDetail(w) {
   const sessions = getSessions(w);
   const tip = getTip(w);
   const panel = document.getElementById('detailPanel');
+  const todayDayIdx = (new Date().getDay()+6)%7;
 
-  const html = sessions.map(s => `
-    <div class="session${s.rest?' rest-day':''}">
-      <div class="sess-day">${s.day}</div>
+  const html = sessions.map((s,i) => {
+    const isToday = (w===currentWeek && i===todayDayIdx);
+    return `
+    <div class="session${s.rest?' rest-day':''}${isToday?' today-row':''}">
+      <div class="sess-day">${s.day}${isToday?'<br><span style="font-size:8px;color:var(--amber)">auj</span>':''}</div>
       <div class="sess-body">
         <div class="sess-name">${s.name}</div>
-        ${s.desc ? `<div class="sess-desc">${s.desc}</div>` : ''}
+        ${s.desc?`<div class="sess-desc">${s.desc}</div>`:''}
       </div>
-      ${s.badge && !s.rest ? `<div class="sess-badge" style="background:${s.bc}22;color:${s.bc}">${s.badge}</div>` : ''}
-    </div>
-  `).join('');
+      ${s.badge&&!s.rest?`<div class="sess-badge" style="background:${s.bc}22;color:${s.bc}">${s.badge}</div>`:''}
+    </div>`;
+  }).join('');
 
   panel.innerHTML = `
     <div class="detail-title">Semaine ${w}</div>
@@ -427,25 +587,197 @@ function renderDetail(w) {
     ${html}
     <div class="tip" style="border-color:${tip.color};background:${tip.color}11;margin-top:12px;">
       <p style="color:${tip.color}">${tip.text}</p>
-    </div>
-  `;
+    </div>`;
 }
 
+// ═══════════════════════════════════════
+//  TABS
+// ═══════════════════════════════════════
 function switchTab(tab) {
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active',(i===0&&tab==='plan')||(i===1&&tab==='paces')));
-  document.getElementById('tab-plan').style.display = tab==='plan'?'block':'none';
-  document.getElementById('tab-paces').style.display = tab==='paces'?'block':'none';
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', (['plan','paces'][i])===tab));
+  document.getElementById('tab-plan').style.display  = tab==='plan'  ? 'block' : 'none';
+  document.getElementById('tab-paces').style.display = tab==='paces' ? 'block' : 'none';
 }
 
-// Init
-const now = new Date();
-const start = new Date(2026,2,16);
+// ═══════════════════════════════════════
+//  TODAY CARD
+// ═══════════════════════════════════════
+function renderToday() {
+  const now = new Date();
+  const dayNames = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  const monthNames = ['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'];
+  const dayIdx = (now.getDay()+6)%7;
+  const sessions = getSessions(currentWeek);
+  const s = sessions[dayIdx];
+  const p = getPhaseStyle(currentWeek);
+
+  // Meta labels
+  document.getElementById('todayDayLbl').textContent =
+    `${dayNames[now.getDay()]} ${now.getDate()} ${monthNames[now.getMonth()]}`;
+  document.getElementById('todayWeekLbl').textContent =
+    `S${currentWeek} · ${getPhaseName(currentWeek)}`;
+
+  const card  = document.getElementById('todayCard');
+  const glow  = document.getElementById('todayGlow');
+  const pill  = document.getElementById('todayPill');
+  const logBtn = document.getElementById('logToggle');
+
+  if (s.rest) {
+    glow.style.background = 'var(--bg2)';
+    card.style.borderColor = 'var(--border)';
+    pill.style.cssText = '';
+    pill.textContent = 'Repos';
+    pill.style.cssText = `background:rgba(102,102,102,0.15);color:var(--text3)`;
+    document.getElementById('todayName').textContent = 'Repos';
+    document.getElementById('todayDescEl').textContent = 'Récupération active. Profite de la journée.';
+    logBtn.style.display = 'none';
+  } else {
+    const color = s.bc || p.text;
+    glow.style.background = `linear-gradient(135deg, ${color} 0%, transparent 70%)`;
+    card.style.borderColor = color + '40';
+    pill.textContent = s.badge;
+    pill.style.cssText = `background:${color}22;color:${color}`;
+    document.getElementById('todayName').textContent = s.name;
+    // strip HTML tags
+    const tmp = document.createElement('div');
+    tmp.innerHTML = s.desc;
+    document.getElementById('todayDescEl').textContent = tmp.textContent || tmp.innerText || '';
+    logBtn.style.display = 'flex';
+
+    const existing = getLogs()[dateKey(now)];
+    if (existing) {
+      logBtn.classList.add('done');
+      document.getElementById('logToggleLbl').textContent = 'Séance enregistrée · modifier';
+      document.getElementById('logToggle').children[0].textContent = '✓';
+      prefillForm(existing);
+    }
+  }
+}
+
+// ═══════════════════════════════════════
+//  LOG
+// ═══════════════════════════════════════
+let rpeVal = null;
+let logOpen = false;
+
+function toggleLog() {
+  logOpen = !logOpen;
+  const form = document.getElementById('logForm');
+  form.style.display = logOpen ? 'flex' : 'none';
+}
+
+function selRPE(v) {
+  rpeVal = v;
+  document.querySelectorAll('.rpe-btn').forEach((b,i) => b.classList.toggle('sel', i+1===v));
+}
+
+function prefillForm(e) {
+  if (e.distance) document.getElementById('logDist').value = e.distance;
+  if (e.duration) document.getElementById('logDur').value  = e.duration;
+  if (e.hr)       document.getElementById('logHR').value   = e.hr;
+  if (e.hrMax)    document.getElementById('logHRmax').value = e.hrMax;
+  if (e.notes)    document.getElementById('logNotes').value = e.notes;
+  if (e.rpe)      selRPE(e.rpe);
+}
+
+function dateKey(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function getLogs()       { try { return JSON.parse(localStorage.getItem('marathon_logs')||'{}'); } catch(e) { return {}; } }
+function saveLogs(data)  { localStorage.setItem('marathon_logs', JSON.stringify(data)); }
+
+function saveLog() {
+  const now = new Date();
+  const key = dateKey(now);
+  const dayIdx = (now.getDay()+6)%7;
+  const sess = getSessions(currentWeek)[dayIdx];
+
+  const dist  = parseFloat(document.getElementById('logDist').value)  || null;
+  const dur   = parseInt(document.getElementById('logDur').value)      || null;
+  const hr    = parseInt(document.getElementById('logHR').value)       || null;
+  const hrMax = parseInt(document.getElementById('logHRmax').value)    || null;
+  const notes = document.getElementById('logNotes').value.trim()       || null;
+
+  let pace = null;
+  if (dist && dur) {
+    const sPerKm = (dur*60)/dist;
+    pace = `${Math.floor(sPerKm/60)}:${String(Math.round(sPerKm%60)).padStart(2,'0')}`;
+  }
+
+  const logs = getLogs();
+  logs[key] = { date:key, week:currentWeek, dayIdx, sessionName:sess.name, distance:dist, duration:dur, pace, hr, hrMax, rpe:rpeVal, notes };
+  saveLogs(logs);
+
+  const btn = document.getElementById('logToggle');
+  btn.classList.add('done');
+  document.getElementById('logToggleLbl').textContent = 'Enregistré !';
+  setTimeout(() => {
+    document.getElementById('logToggleLbl').textContent = 'Séance enregistrée · modifier';
+    document.getElementById('logToggle').children[0].textContent = '✓';
+    logOpen = false;
+    document.getElementById('logForm').style.display = 'none';
+    renderJournal();
+  }, 700);
+}
+
+function deleteLog(key) {
+  const logs = getLogs(); delete logs[key]; saveLogs(logs);
+  renderJournal(); renderToday();
+}
+
+// ═══════════════════════════════════════
+//  JOURNAL
+// ═══════════════════════════════════════
+function renderJournal() {
+  const logs = getLogs();
+  const keys = Object.keys(logs).sort().reverse();
+  const el = document.getElementById('journalList');
+  if (!keys.length) {
+    el.innerHTML = '<div class="j-empty">Aucune séance encore.<br>Enregistre ta première séance ci-dessus.</div>';
+    return;
+  }
+  const DN = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  const MN = ['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'];
+  el.innerHTML = keys.map(key => {
+    const e = logs[key];
+    const d = new Date(key+'T12:00:00');
+    const lbl = `${DN[d.getDay()]} ${d.getDate()} ${MN[d.getMonth()]} · S${e.week}`;
+    const stats = [];
+    if (e.distance) stats.push(`<span class="j-stat"><strong>${e.distance} km</strong></span>`);
+    if (e.duration) stats.push(`<span class="j-stat"><strong>${e.duration} min</strong></span>`);
+    if (e.pace)     stats.push(`<span class="j-stat">${e.pace}<span style="font-size:10px;color:var(--text3)">/km</span></span>`);
+    if (e.hr)       stats.push(`<span class="j-stat"><strong>${e.hr}</strong> <span style="font-size:10px;color:var(--text3)">bpm moy</span></span>`);
+    if (e.hrMax)    stats.push(`<span class="j-stat"><strong>${e.hrMax}</strong> <span style="font-size:10px;color:var(--text3)">bpm max</span></span>`);
+    if (e.rpe)      stats.push(`<span class="j-stat">RPE <strong>${e.rpe}</strong><span style="font-size:10px;color:var(--text3)">/10</span></span>`);
+    return `
+    <div class="journal-entry">
+      <div class="j-top">
+        <div>
+          <div class="j-date">${lbl}</div>
+          <div class="j-name">${e.sessionName}</div>
+        </div>
+        <button class="j-del" onclick="deleteLog('${key}')">×</button>
+      </div>
+      ${stats.length?`<div class="j-stats">${stats.join('')}</div>`:''}
+      ${e.notes?`<div class="j-notes">${e.notes}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+const now  = new Date();
 const race = new Date(2026,10,1);
-const weeksLeft = Math.max(0, Math.ceil((race-now)/(7*24*3600*1000)));
-document.getElementById('weeksLeft').textContent = weeksLeft;
+document.getElementById('weeksLeft').textContent = Math.max(0, Math.ceil((race-now)/(7*24*3600*1e3)));
+
+const diffMs = now - PLAN_START;
+const currentWeek = diffMs < 0 ? 1 : Math.max(1, Math.min(33, Math.floor(diffMs/(7*24*3600*1e3))+1));
 
 renderGrid();
-const currentWeek = Math.max(1, Math.min(33, Math.floor((now-start)/(7*24*3600*1000))+1));
+renderToday();
+renderJournal();
 setTimeout(() => selectWeek(currentWeek), 150);
 </script>
 </body>
